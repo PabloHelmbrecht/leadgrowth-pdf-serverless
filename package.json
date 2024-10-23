@@ -1,0 +1,31 @@
+{
+  "name": "leadgrowth-pdf-serverless",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "bunx tailwind -i ./src/app/globals.css -o ./public/styles/style.css && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "build:css": "bunx tailwind -i ./src/app/globals.css -o ./public/styles/style.css"
+  },
+  "dependencies": {
+    "@sparticuz/chromium-min": "^129.0.0",
+    "handlebars": "^4.7.8",
+    "next": "14.2.15",
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^23.5.3",
+    "puppeteer-core": "^23.5.3",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "postcss": "^8",
+    "prettier": "3.3.3",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
