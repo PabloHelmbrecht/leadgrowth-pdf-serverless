@@ -245,7 +245,7 @@ export const GET = async (req: Request) => {
     await page.setContent(html, { waitUntil: "networkidle0" });
     await page.addStyleTag({ path: path.join(process.cwd(), 'public', 'styles', 'style.css') })
 
-    const pdfBuffer = await page.pdf({ printBackground: true, height: "35.5cm", width: "21cm" });
+    const pdfBuffer = await page.pdf({ printBackground: true, height: "37cm", width: "21cm" });
 
     await browser.close();
 
