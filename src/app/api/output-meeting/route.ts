@@ -2,6 +2,9 @@ import chromium from "@sparticuz/chromium-min";
 import path from "path";
 import fs from "fs/promises";
 import handlebars from "handlebars";
+// @ts-ignore 
+import filter from "handlebars.filter";
+
 import { PDFDocument } from "pdf-lib";
 
 
@@ -68,6 +71,7 @@ export const GET = async (req: Request) => {
 
     const templatePath = path.join(process.cwd(), 'public', 'views', 'output-meeting.hbs');
     const templateContent = await fs.readFile(templatePath, "utf-8");
+    filter.registerHelper(handlebars);
     const template = handlebars.compile(templateContent);
     const html = template({ questions:questionsArray, companyName, companyLogo, meetingDate });
 

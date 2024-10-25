@@ -4,6 +4,8 @@ import fs from "fs/promises";
 import handlebars from "handlebars";
 import { PDFDocument } from "pdf-lib";
 import { cache } from "react";
+// @ts-ignore 
+import filter from "handlebars.filter";
 
 function extractLinkedInId(url: string) {
     const regex = /linkedin\.com\/(company|in)\/([^\/\?]+)/;
@@ -212,6 +214,7 @@ export const GET = async (req: Request) => {
 
     const templatePath = path.join(process.cwd(), 'public', 'views', 'dossier.hbs');
     const templateContent = await fs.readFile(templatePath, "utf-8");
+    filter.registerHelper(handlebars);
     const template = handlebars.compile(templateContent);
     const html = template(parameters);
 

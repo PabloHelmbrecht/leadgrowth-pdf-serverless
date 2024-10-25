@@ -1,4 +1,32 @@
 @tailwind base;
+
+
+@layer base {
+  h1 {
+    @apply text-xl font-semibold;
+  }
+  h2 {
+    @apply text-xl italic;
+  }
+  h3 {
+    @apply text-lg;
+  }
+  a {
+    @apply text-[#1E87FF] underline;
+  }
+
+  ul {
+    @apply  list-inside list-disc;
+  }
+}
+
+li {
+  @apply pb-2;
+}
+
+
+
+
 @tailwind components;
 @tailwind utilities;
 
