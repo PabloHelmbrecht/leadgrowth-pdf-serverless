@@ -105,7 +105,6 @@ export const GET = async (req: Request) => {
         if (name === "assistants") {
 
             try {
-                console.log(value)
                 value = value ? JSON.parse(String(value)) : null
             }
             catch (e) {
@@ -129,7 +128,6 @@ export const GET = async (req: Request) => {
 
 
         if (name === "companyLinkedinFormatted" && acc.companyLinkedin) {
-            console.log(acc.companyLinkedin)
             value = extractLinkedInId(String(acc.companyLinkedin))
         }
 
