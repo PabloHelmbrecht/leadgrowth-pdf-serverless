@@ -1,12 +1,15 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 
-const apiKey = "eziAc9aC7tPXuf2Ki7I0kQ";
+const apiKey = String(process.env.APOLLO_API_KEY);
 
-
-
-async function fetchPeople(personData: { email: string | string[] | undefined; linkedin_url: string | string[] | undefined; }) {
+async function fetchPeople(personData: {
+  email: string | string[] | undefined;
+  linkedin_url: string | string[] | undefined;
+}) {
   const baseUrl = "https://api.apollo.io/api/v1/people/match";
-  const queryParams: { [key: string]: string | boolean | string[] | undefined } = {
+  const queryParams: {
+    [key: string]: string | boolean | string[] | undefined;
+  } = {
     ...personData,
     reveal_personal_emails: false,
     reveal_phone_number: false,
@@ -69,11 +72,13 @@ async function fetchCompany(domain: string) {
   }
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const { type, email, linkedin_url, domain } = req.query;
+export const GET = async (req: Request) => {
+  const reqUrl = new URL(req.url);
+  const searchParams = reqUrl.searchParams;
+  const type = searchParams.get("type");
+  const email = searchParams.get("email");
+  const linkedin_url = searchParams.get("linkedin_url");
+  const domain = searchParams.get("domain");
 
   try {
     if (type === "people") {
@@ -81,23 +86,25 @@ export default async function handler(
         email: email || undefined,
         linkedin_url: linkedin_url || undefined,
       });
-      return res.status(200).json(response);
+      return NextResponse.json(response, { status: 200 });
     }
 
     if (type === "company") {
       if (!domain) {
-        return res
-          .status(400)
-          .json({ error: "Domain is required for company lookup" });
+        return NextResponse.json(
+          { error: "Domain is required for company lookup" },
+          { status: 400 }
+        );
       }
       const response = await fetchCompany(domain as string);
-      return res.status(200).json(response);
+      return NextResponse.json(response, { status: 200 });
     }
 
-    return res
-      .status(400)
-      .json({ error: "Invalid type. Must be 'people' or 'company'." });
+    return NextResponse.json(
+      { error: "Invalid type. Must be 'people' or 'company'." },
+      { status: 400 }
+    );
   } catch (error: any) {
-    return res.status(500).json({ error: error.message });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
-}
+};
