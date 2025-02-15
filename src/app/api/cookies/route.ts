@@ -1,12 +1,31 @@
 import chromium from "@sparticuz/chromium-min";
 import path from "path";
 import { NextResponse } from "next/server";
+import fs from "fs/promises";
 
 
 
 export const GET = async (req: Request) => {
     const reqUrl = new URL(req.url);
     const searchParams = reqUrl.searchParams;
+
+    const email = searchParams.get('email');
+
+    if(!email) {
+        return NextResponse.json(
+            { error: "Email is required" },
+            { status: 400 }
+          );
+    }
+
+    const password = searchParams.get('password');
+
+    if(!password) {
+        return NextResponse.json(
+            { error: "Password is required" },
+            { status: 400 }
+          );
+    }
 
 
 
@@ -24,13 +43,13 @@ export const GET = async (req: Request) => {
             executablePath: await chromium.executablePath(
                 path.join(process.cwd(), 'public', 'chromium')
             ),
-            headless: false,
+            headless: chromium.headless,
         });
     }
     else {
         puppeteer = await import("puppeteer")
         browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
         });
 
     }
@@ -45,29 +64,29 @@ export const GET = async (req: Request) => {
     
     
     // Esperar a que aparezca el campo de email
+
     await page.waitForSelector('input[name="email"]', { timeout: 1000 });
     
 
 
+
     // Escribir las credenciales
-    await page.type('input[name="email"]', 'stefania.alvarez@oneinfotechnology.com', { delay: 10 });
-    await page.type('input[name="password"]', '9By5Fo9ZlGmS35Z', { delay: 10 });
+    await page.type('input[name="email"]', email, { delay: 10 });
+    await page.type('input[name="password"]', password, { delay: 10 });
 
     // Hacer clic en el botón de login
     await page.click('button[type="submit"]');
 
     // Esperar la navegación después del login
-    await page.waitForNavigation();
+    //await page.waitForNavigation();
 
     // Obtener cookies
     const cookies = await page.cookies();
-    console.log('Cookies obtenidas:', cookies);
 
     await browser.close();
 
           return NextResponse.json(cookies, { status: 200 });
     
-
 
 
 }
