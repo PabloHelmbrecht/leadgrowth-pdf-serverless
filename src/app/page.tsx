@@ -15,14 +15,14 @@ export default function Home() {
               /api/meeting-output
             </code>
       </Link>
-      <Link href="/api/meeting-output" className="bg-transparent w-fit ">
+      <Link href="/api/apollo" className="bg-transparent w-fit ">
         Accede al data enrichment de Apollo en {" "}
             <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
               /api/apollo
             </code>
       </Link>
     
-      <Link href="/api/meeting-output" className="bg-transparent w-fit ">
+      <Link href="/api/credentials" className="bg-transparent w-fit ">
         Accede al extractor de cookies de Apollo en {" "}
             <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
               /api/credentials
