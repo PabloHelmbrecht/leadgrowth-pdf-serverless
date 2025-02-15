@@ -71,8 +71,8 @@ export const GET = async (req: Request) => {
 
 
     // Escribir las credenciales
-    await page.type('input[name="email"]', email, { delay: 10 });
-    await page.type('input[name="password"]', password, { delay: 10 });
+    await page.type('input[name="email"]', email);
+    await page.type('input[name="password"]', password);
 
     // Hacer clic en el botón de login
     await page.click('button[type="submit"]');
