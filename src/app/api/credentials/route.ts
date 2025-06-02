@@ -3,90 +3,89 @@ import path from "path";
 import { NextResponse } from "next/server";
 import fs from "fs/promises";
 
-
-
 export const GET = async (req: Request) => {
-    const reqUrl = new URL(req.url);
-    const searchParams = reqUrl.searchParams;
+  const reqUrl = new URL(req.url);
+  const searchParams = reqUrl.searchParams;
 
-    const email = searchParams.get('email');
+  const email = searchParams.get("email");
 
-    if(!email) {
-        return NextResponse.json(
-            { error: "Email is required" },
-            { status: 400 }
-          );
-    }
+  if (!email) {
+    return NextResponse.json({ error: "Email is required" }, { status: 400 });
+  }
 
-    const password = searchParams.get('password');
+  const password = searchParams.get("password");
 
-    if(!password) {
-        return NextResponse.json(
-            { error: "Password is required" },
-            { status: 400 }
-          );
-    }
+  if (!password) {
+    return NextResponse.json(
+      { error: "Password is required" },
+      { status: 400 }
+    );
+  }
 
+  let puppeteer;
 
+  let browser;
 
+  if (process.env.NODE_ENV !== "development") {
+    puppeteer = await import("puppeteer-core");
 
-    let puppeteer
+    browser = await puppeteer.launch({
+      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(
+        path.join(process.cwd(), "public", "chromium")
+      ),
+      headless: true,
+    });
+  } else {
+    puppeteer = await import("puppeteer");
+    browser = await puppeteer.launch({
+      headless: true,
+    });
+  }
 
-    let browser
+  const page = await browser.newPage();
 
-    if (process.env.NODE_ENV !== "development") {
-        puppeteer = await import("puppeteer-core");
+  await page.setViewport({ width: 1200, height: 600 });
 
-        browser = await puppeteer.launch({
-            args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
-            defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath(
-                path.join(process.cwd(), 'public', 'chromium')
-            ),
-            headless: chromium.headless,
-        });
-    }
-    else {
-        puppeteer = await import("puppeteer")
-        browser = await puppeteer.launch({
-            headless: true,
-        });
+  // Ir a la página de login
+  await page.goto("https://app.apollo.io/#/login", {
+    waitUntil: "networkidle2",
+  });
 
-    }
+  // Esperar a que aparezca el campo de email
 
-    const page = await browser.newPage();
+  await page.waitForSelector('input[name="email"]', { timeout: 1000 });
 
-    await page.setViewport({ width: 1200, height: 600 });
+  // Escribir las credenciales
+  await page.type('input[name="email"]', email);
+  await page.type('input[name="password"]', password);
 
-    // Ir a la página de login
-    await page.goto('https://app.apollo.io/#/login', { waitUntil: 'networkidle2' });
+  console.log("hola")
 
-    
-    
-    // Esperar a que aparezca el campo de email
+  // Hacer clic en el botón de login
+  await page.click('button[type="submit"]');
 
-    await page.waitForSelector('input[name="email"]', { timeout: 1000 });
-    
+  // Esperar la navegación después del login
+  // await page.waitForNavigation()
+  console.log("waiting for login");
 
+  await new Promise(r => setTimeout(r, 10000));
 
+  await page.screenshot({
+    path: 'screenshot.jpg'
+  });
+  await page.waitForSelector('div', {
+    visible: true,
+});
+  console.log("logged in");
 
-    // Escribir las credenciales
-    await page.type('input[name="email"]', email);
-    await page.type('input[name="password"]', password);
+  // await Promise.all(page.waitForNavigation(),page.evaluate('form', form => form?.submit()));
 
-    // Hacer clic en el botón de login
-    await page.click('button[type="submit"]');
+  // Obtener cookies
+  const cookies = await page.cookies();
 
-    // Esperar la navegación después del login
-    //await page.waitForNavigation();
+  await browser.close();
 
-    // Obtener cookies
-    const cookies = await page.cookies();
-
-    await browser.close();
-
-          return NextResponse.json(cookies, { status: 200 });
-    
-
-
-}
+  return NextResponse.json(cookies, { status: 200 });
+};

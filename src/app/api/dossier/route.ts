@@ -31,6 +31,53 @@ function formatUrl(url: string) {
         .split('/')[0];                // Toma solo el dominio principal, antes de cualquier ruta
 }
 
+// Función para quitar acentos y pasar a minúsculas
+function quitarAcentosYMinusculas(str: string) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+// Genera variantes del nombre completo
+function generarVariantesNombre(fullName: string): string[] {
+    const partes = fullName.split(/\s+/).filter(Boolean);
+    const variantes = new Set<string>();
+
+    // Todas las combinaciones posibles de las partes del nombre
+    for (let i = 0; i < partes.length; i++) {
+        for (let j = i; j < partes.length; j++) {
+            const variante = partes.slice(i, j + 1).join(' ');
+            variantes.add(variante);
+        }
+    }
+    // También agregar el nombre completo
+    variantes.add(fullName);
+
+    // Agregar versiones normalizadas (sin acentos y minúsculas)
+    const variantesNormalizadas = Array.from(variantes).map(quitarAcentosYMinusculas);
+    console.log({variantesNormalizadas, variantes})
+    return [...variantes, ...variantesNormalizadas];
+}
+
+// Reemplaza todas las variantes por XXXX, robusto a acentos y mayúsculas
+function ofuscarNombreEnTexto(texto: string, fullName: string): string {
+    const variantes = generarVariantesNombre(fullName)
+        .map(v => quitarAcentosYMinusculas(v))
+        .sort((a, b) => b.length - a.length); // Primero las variantes más largas
+
+    let textoNormalizado = quitarAcentosYMinusculas(texto);
+    let resultado = texto;
+
+    variantes.forEach(variant => {
+        if (!variant.trim()) return;
+        let idx = 0;
+        while ((idx = textoNormalizado.indexOf(variant, idx)) !== -1) {
+            // Encuentra la posición en el texto original
+            resultado = resultado.substring(0, idx) + '<span class="blur-sm">XXXXXXX</span>' + resultado.substring(idx + variant.length);
+            textoNormalizado = quitarAcentosYMinusculas(resultado);
+            idx += 4; // Avanza después de 'XXXX'
+        }
+    });
+    return resultado;
+}
 
 export const GET = async (req: Request) => {
     const reqUrl = new URL(req.url);
@@ -65,7 +112,9 @@ export const GET = async (req: Request) => {
         "websiteFormatted",
         "companyLocation",
         "prospectLocation",
-        "includeAssistants"
+        "includeAssistants",
+        "serviceModel",
+        "isTurboSales"
 
     ] as const
 
@@ -77,6 +126,7 @@ export const GET = async (req: Request) => {
         "fullName",
         "emailContext",
         "role",
+        "serviceModel"
     ]
 
 
@@ -101,6 +151,8 @@ export const GET = async (req: Request) => {
             }
         }
 
+      
+
 
         if (name === "assistants") {
 
@@ -112,6 +164,40 @@ export const GET = async (req: Request) => {
                 value = null
             }
         }
+
+        if (name === "isTurboSales") {
+
+            try {
+                value = acc.serviceModel === "Turbo Sales"
+            }
+            catch (e) {
+                console.error(e)
+                value = null
+            }
+
+        }
+
+        // if (name === "emailContext") {
+
+        //     try {
+        //         if (value && acc.fullName) {
+        //             if (typeof value === "string") {
+        //                 value = ofuscarNombreEnTexto(value, String(acc.fullName));
+        //                 console.log({value, name: acc.fullName})
+        //             } else if (typeof value === "object" && value !== null) {
+        //                 for (const key in value) {
+        //                     if (typeof value[key] === "string") {
+        //                         value[key] = ofuscarNombreEnTexto(value[key], String(acc.fullName));
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     catch (e) {
+        //         console.error(e)
+        //         value = null
+        //     }
+        // }
 
 
         if (name === "includeAssistants") {
@@ -213,6 +299,7 @@ export const GET = async (req: Request) => {
     const templatePath = path.join(process.cwd(), 'public', 'views', 'dossier.hbs');
     const templateContent = await fs.readFile(templatePath, "utf-8");
     filter.registerHelper(handlebars);
+
     const template = handlebars.compile(templateContent);
     const html = template(parameters);
 

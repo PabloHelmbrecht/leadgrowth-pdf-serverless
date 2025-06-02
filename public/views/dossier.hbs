@@ -1,337 +1,304 @@
-<!DOCTYPE html>
 <html>
 
-<head>
+  <head>
 
     <title>Dossier {{companyName}} | {{fullName}}</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-
-
-
-
     <style>
-        .poppins-thin {
-            font-family: "Poppins", sans-serif;
-            font-weight: 100;
-            font-style: normal;
+        .blur-sm {
+            filter: blur(8px);
         }
-
-        .poppins-extralight {
-            font-family: "Poppins", sans-serif;
-            font-weight: 200;
-            font-style: normal;
-        }
-
-        .poppins-light {
-            font-family: "Poppins", sans-serif;
-            font-weight: 300;
-            font-style: normal;
-        }
-
-        .poppins-regular {
-            font-family: "Poppins", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-        }
-
-        .poppins-medium {
-            font-family: "Poppins", sans-serif;
-            font-weight: 500;
-            font-style: normal;
-        }
-
-        .poppins-semibold {
-            font-family: "Poppins", sans-serif;
-            font-weight: 600;
-            font-style: normal;
-        }
-
-        .poppins-bold {
-            font-family: "Poppins", sans-serif;
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        .poppins-extrabold {
-            font-family: "Poppins", sans-serif;
-            font-weight: 800;
-            font-style: normal;
-        }
-
-        .poppins-black {
-            font-family: "Poppins", sans-serif;
-            font-weight: 900;
-            font-style: normal;
-        }
-
-        .poppins-thin-italic {
-            font-family: "Poppins", sans-serif;
-            font-weight: 100;
-            font-style: italic;
-        }
-
-        .poppins-extralight-italic {
-            font-family: "Poppins", sans-serif;
-            font-weight: 200;
-            font-style: italic;
-        }
-
-        .poppins-light-italic {
-            font-family: "Poppins", sans-serif;
-            font-weight: 300;
-            font-style: italic;
-        }
-
-        .poppins-regular-italic {
-            font-family: "Poppins", sans-serif;
-            font-weight: 400;
-            font-style: italic;
-        }
-
-        .poppins-medium-italic {
-            font-family: "Poppins", sans-serif;
-            font-weight: 500;
-            font-style: italic;
-        }
-
-        .poppins-semibold-italic {
-            font-family: "Poppins", sans-serif;
-            font-weight: 600;
-            font-style: italic;
-        }
-
-        .poppins-bold-italic {
-            font-family: "Poppins", sans-serif;
-            font-weight: 700;
-            font-style: italic;
-        }
-
-        .poppins-extrabold-italic {
-            font-family: "Poppins", sans-serif;
-            font-weight: 800;
-            font-style: italic;
-        }
-
-        .poppins-black-italic {
-            font-family: "Poppins", sans-serif;
-            font-weight: 900;
-            font-style: italic;
-        }
-
-        .pt-sans-regular {
-            font-family: "PT Sans", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-        }
-
-
-        .pt-sans-bold {
-            font-family: "PT Sans", sans-serif;
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        .pt-sans-regular-italic {
-            font-family: "PT Sans", sans-serif;
-            font-weight: 400;
-            font-style: italic;
-        }
-
-        .pt-sans-bold-italic {
-            font-family: "PT Sans", sans-serif;
-            font-weight: 700;
-            font-style: italic;
-        }
-
-
-
-        .inter-regular {
-            font-family: "Inter", serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
-        }
-
-        .container-question {
-            break-inside: avoid;
-            display: block;
-        
-        }
+      .poppins-thin { font-family: "Poppins", sans-serif; font-weight: 100;
+      font-style: normal; } .poppins-extralight { font-family: "Poppins",
+      sans-serif; font-weight: 200; font-style: normal; } .poppins-light {
+      font-family: "Poppins", sans-serif; font-weight: 300; font-style: normal;
+      } .poppins-regular { font-family: "Poppins", sans-serif; font-weight: 400;
+      font-style: normal; } .poppins-medium { font-family: "Poppins",
+      sans-serif; font-weight: 500; font-style: normal; } .poppins-semibold {
+      font-family: "Poppins", sans-serif; font-weight: 600; font-style: normal;
+      } .poppins-bold { font-family: "Poppins", sans-serif; font-weight: 700;
+      font-style: normal; } .poppins-extrabold { font-family: "Poppins",
+      sans-serif; font-weight: 800; font-style: normal; } .poppins-black {
+      font-family: "Poppins", sans-serif; font-weight: 900; font-style: normal;
+      } .poppins-thin-italic { font-family: "Poppins", sans-serif; font-weight:
+      100; font-style: italic; } .poppins-extralight-italic { font-family:
+      "Poppins", sans-serif; font-weight: 200; font-style: italic; }
+      .poppins-light-italic { font-family: "Poppins", sans-serif; font-weight:
+      300; font-style: italic; } .poppins-regular-italic { font-family:
+      "Poppins", sans-serif; font-weight: 400; font-style: italic; }
+      .poppins-medium-italic { font-family: "Poppins", sans-serif; font-weight:
+      500; font-style: italic; } .poppins-semibold-italic { font-family:
+      "Poppins", sans-serif; font-weight: 600; font-style: italic; }
+      .poppins-bold-italic { font-family: "Poppins", sans-serif; font-weight:
+      700; font-style: italic; } .poppins-extrabold-italic { font-family:
+      "Poppins", sans-serif; font-weight: 800; font-style: italic; }
+      .poppins-black-italic { font-family: "Poppins", sans-serif; font-weight:
+      900; font-style: italic; } .pt-sans-regular { font-family: "PT Sans",
+      sans-serif; font-weight: 400; font-style: normal; } .pt-sans-bold {
+      font-family: "PT Sans", sans-serif; font-weight: 700; font-style: normal;
+      } .pt-sans-regular-italic { font-family: "PT Sans", sans-serif;
+      font-weight: 400; font-style: italic; } .pt-sans-bold-italic {
+      font-family: "PT Sans", sans-serif; font-weight: 700; font-style: italic;
+      } .inter-regular { font-family: "Inter", serif; font-optical-sizing: auto;
+      font-weight: 400; font-style: normal; } .container-question {
+      break-inside: avoid; display: block; }
     </style>
-</head>
+  </head>
 
-<body class="inter-regular flex  flex-col bg-[#003282]">
-
+  <body class="inter-regular flex flex-col bg-[#003282]">
 
     <div class="h-6 bg-gradient-to-r from-[#1E87FF] to-[#003282]"></div>
 
-    <div class="company bg-white inter flex  h-fit w-full flex-row justify-between p-8 py-12">
-        <div class="flex flex-row justify-between gap-8">
-            <div class="flex w-full flex-1 flex-col items-start justify-start gap-8">
-                <div class="flex flex-row gap-8">
-                    {{#if companyLogo}}
-                    <img src={{companyLogo}} alt="company logo"
-                        class="h-32 w-32 flex-initial  aspect-square rounded-lg border border-neutral-300" />                    
-                    {{else}}
-                    <div class="h-32 w-32 flex-initial  flex items-center justify-center aspect-square rounded-lg border border-neutral-300 bg-neutral-200">
-                        <i class="ph-bold ph-camera-slash text-3xl text-neutral-500 "></i>
-                    </div>
-                    {{/if}}
-                    
-                    <div class="flex flex-col justify-start gap-4">
-                        <h1 class="poppins-semibold w-full text-pretty text-4xl">{{companyName}}</h1>
-                        <h2 class="flex w-fit flex-row gap-3 rounded-md bg-[#1E87FF] px-4 py-1 text-white shadow-sm">
-                            {{meetingDate}}</h2>
-                    </div>
-                </div>
-                <div class="flex w-full flex-row flex-wrap gap-4">
-                    {{#if website}}
-                    <a href={{website}}
-                        class="flex w-fit flex-row  items-center gap-2 rounded-md bg-slate-100 px-4 py-1 ">
-                        <i class="ph-bold ph-link text-[#1E87FF]"></i>
-                        {{websiteFormatted}}
-                    </a>
-                    {{/if}}
-                    {{#if companyLinkedin}}
-                    <a href={{companyLinkedin}}
-                        class="flex w-fit flex-row  items-center gap-2 rounded-md bg-slate-100 px-4 py-1">
-                        <i class="ph-fill ph-linkedin-logo text-[#1E87FF]"></i>
-                        {{companyLinkedinFormatted}}
-                    </a>
-                    {{/if}}
-                    {{#if companyLocation}}
-                    <div class="flex w-fit flex-row  items-center gap-2 rounded-md bg-slate-100 px-4 py-1">
-                        <i class="ph-fill ph-map-pin text-[#1E87FF]"></i>
-                        {{companyLocation}}
-                    </div>
-                    {{/if}}
-                    {{#if companyPhone}}
-                    <div class="flex w-fit flex-row  items-center gap-2 rounded-md bg-slate-100 px-4 py-1">
-                        <i class="ph-fill ph-phone text-[#1E87FF]"></i>
-                        {{companyPhone}}
-                    </div>
-                    {{/if}}
-                </div>
-
-                <span class="w-full border-t-[1px] border-neutral-300"></span>
-
-                <div class="flex flex-col items-start justify-start gap-2">
-                    <h2 class="poppins-semibold text-lg">Descripción de la empresa</h2>
-                    <p class="text-pretty">{{companyDescription}}</p>
-                </div>
-            </div>
-            <div
-                class="flex h-fit w-60 flex-initial flex-col gap-3 rounded-lg border border-neutral-300 bg-white p-6 shadow-sm">
-                <h2 class="poppins-semibold text-lg">Información</h2>
-                <div class="flex flex-col divide-y divide-neutral-300">
-                    <div class="flex w-full flex-col gap-1 pb-3">
-                        <h3 class="text-neutral-600">Número de Empleados</h3>
-                        <h4 class="poppins-semibold text-2xl">{{#if headcount}}{{headcount}}{{else}}-{{/if}}</h4>
-                    </div>
-                    <div class="flex w-full flex-col gap-1 py-3">
-                        <h3 class="text-neutral-600">Revenue Anual</h3>
-                        <h4 class="poppins-semibold text-2xl">{{#if revenue}}{{revenue}}{{else}}-{{/if}}</h4>
-                    </div>
-                    <div class="flex w-full flex-col gap-1 py-3">
-                        <h3 class="text-neutral-600">Año de Fundación</h3>
-                        <h4 class="poppins-semibold text-2xl">{{#if fundingYear}}{{fundingYear}}{{else}}-{{/if}}</h4>
-                    </div>
-                    <div class="flex w-full flex-col gap-2 pt-3">
-                        <h3 class="text-neutral-600">Industrias</h3>
-                        <div class="flex max-h-32 flex-row flex-wrap gap-2 overflow-hidden">
-                            {{#each industries}}
-                            <div class="flex w-fit flex-row gap-3 rounded-md bg-slate-100 px-3 py-1 text-sm">
-                                {{this}}</div>
-                            {{/each}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="prospect flex h-12 flex-1 flex-col gap-8 bg-[#003282] p-8 pt-12 container-question">
-        <div class="flex flex-row justify-start gap-8 relative ">
-            {{#if photo}}
-                                <img src={{photo}} alt="photo " class="aspect-square w-32 h-32 flex-initial rounded-lg" />
-                    {{else}}
-                    <div class="h-32 w-32 flex-initial  flex items-center justify-center aspect-square rounded-lg border border-neutral-300 bg-neutral-200">
-                        <i class="ph-bold ph-camera-slash text-3xl text-neutral-500 "></i>
-                    </div>
-                    {{/if}}
-            <div class="flex flex-col justify-start gap-4 flex-1 max-w-96">
-                <h1 class="poppins-semibold w-full text-pretty text-4xl text-white">{{fullName}}
-                </h1>
-                <h2 class="flex w-fit flex-row gap-3 rounded-md bg-[#1E87FF] px-4 py-1 text-white shadow-sm">
-                    {{role}}</h2>
-            </div>
-
-        </div>
-
-        <div class=" w-full flex flex-row flex-wrap gap-4 ">
-                    {{#if email}}
-            <a href="mailto:{{email}}" class="flex w-fit flex-row  items-center gap-2 rounded-md bg-white  px-4 py-1"><i
-                    class="ph-fill ph-envelope-simple text-[#1E87FF]"></i>{{email}}</a>
-                    {{/if}}
-                    {{#if prospectPhone}}
-            <div class="flex w-fit flex-row  items-center gap-2 rounded-md bg-white  px-4 py-1">
-                <i class="ph-fill ph-phone text-[#1E87FF]"></i>{{prospectPhone}}
-            </div>
+    <div
+      class="company bg-white inter flex h-fit w-full flex-row justify-between p-8 py-12"
+    >
+      <div class="flex flex-row justify-between gap-8">
+        <div
+          class="flex w-full flex-1 flex-col items-start justify-start gap-8"
+        >
+          <div class="flex flex-row gap-8">
+            {{#if companyLogo}}
+              <img
+                src={{companyLogo}}
+                alt="company logo"
+                class="h-32 w-32 flex-initial aspect-square rounded-lg border border-neutral-300"
+              />
+            {{else}}
+              <div
+                class="h-32 w-32 flex-initial flex items-center justify-center aspect-square rounded-lg border border-neutral-300 bg-neutral-200"
+              >
+                <i
+                  class="ph-bold ph-camera-slash text-3xl text-neutral-500"
+                ></i>
+              </div>
             {{/if}}
-                    {{#if prospectLinkedin}}
-            <a href={{prospectLinkedin}} class="flex w-fit flex-row  items-center gap-2 rounded-md bg-white  px-4 py-1">
-                <i class="ph-fill ph-linkedin-logo text-[#1E87FF]"></i>{{prospectLinkedinFormatted}}
-            </a>
-            {{/if}}
-                    {{#if prospectLocation}}
-            <div class="flex w-fit flex-row  items-center gap-2 rounded-md bg-white  px-4 py-1">
-                <i class="ph-fill ph-map-pin text-[#1E87FF]"></i>{{prospectLocation}}
+
+            <div class="flex flex-col justify-start gap-4">
+              <h1
+                class="poppins-semibold w-full text-pretty text-4xl"
+              >{{companyName}}</h1>
+              <h2
+                class="flex w-fit flex-row gap-3 rounded-md bg-[#1E87FF] px-4 py-1 text-white shadow-sm"
+              >
+                {{meetingDate}}</h2>
             </div>
+          </div>
+          <div class="flex w-full flex-row flex-wrap gap-4">
+            {{#if website}}
+              <a
+                href={{website}}
+                class="flex w-fit flex-row items-center gap-2 rounded-md bg-slate-100 px-4 py-1"
+              >
+                <i class="ph-bold ph-link text-[#1E87FF]"></i>
+                {{websiteFormatted}}
+              </a>
             {{/if}}
-                   
-        </div>
-        <span class="w-full border-t-[1px] border-white"></span>
+            {{#if companyLinkedin}}
+              <a
+                href={{companyLinkedin}}
+                class="flex w-fit flex-row items-center gap-2 rounded-md bg-slate-100 px-4 py-1"
+              >
+                <i class="ph-fill ph-linkedin-logo text-[#1E87FF]"></i>
+                {{companyLinkedinFormatted}}
+              </a>
+            {{/if}}
+            {{#if companyLocation}}
+              <div
+                class="flex w-fit flex-row items-center gap-2 rounded-md bg-slate-100 px-4 py-1"
+              >
+                <i class="ph-fill ph-map-pin text-[#1E87FF]"></i>
+                {{companyLocation}}
+              </div>
+            {{/if}}
+            {{#if companyPhone}}
+              <div
+                class="flex w-fit flex-row items-center gap-2 rounded-md bg-slate-100 px-4 py-1"
+              >
+                <i class="ph-fill ph-phone text-[#1E87FF]"></i>
+                {{companyPhone}}
+              </div>
+            {{/if}}
+          </div>
 
-        <div class="flex flex-col items-start justify-start gap-2 ">
-            <h2 class="poppins-semibold text-lg text-[white]">Contexto</h2>
-            <div class="text-pretty rounded-md border border-slate-300 bg-white p-4 shadow-sm">{{{filter emailContext "markdown"}}}</div>
-        </div>
-        
-                    {{#if includeAssistants}}
-        <div class="flex flex-col items-start justify-start gap-2 ">
-            <h2 class="poppins-semibold text-lg text-[white]">Otros asistentes</h2>
-            <div class="flex flex-row gap-6 flex-wrap overflow-hidden h-16 flex-initial ">
-                {{#each assistants}}
+          <span class="w-full border-t-[1px] border-neutral-300"></span>
 
-                <div
-                    class="flex flex-row justify-start gap-4 rounded-md border border-slate-300 h-fit bg-white p-2 pr-3  ">
-                    {{#if this.photo}}
-                    <img src={{this.photo}} alt="photo_assistant" class="h-10 w-10 flex-initial rounded-md" />
-                    {{else}}
-                    <div class="h-32 w-32 flex-initial  flex items-center justify-center aspect-square rounded-lg border border-neutral-300 bg-neutral-200">
-                        <i class="ph-bold ph-camera-slash text text-neutral-500 "></i>
-                    </div>
-                    {{/if}}
-                    <div class="flex flex-col items-start justify-start">
-                        <h3 class="w-full text-pretty text-sm font-semibold">{{this.name}}</h3>
-                        <h5 class="flex w-fit flex-row text-xs">{{this.role}}</h5>
-                    </div>
-                </div>
+          <div class="flex flex-col items-start justify-start gap-2">
+            <h2 class="poppins-semibold text-lg">Descripción de la empresa</h2>
+            <p class="text-pretty">{{companyDescription}}</p>
+          </div>
+        </div>
+        <div
+          class="flex h-fit w-60 flex-initial flex-col gap-3 rounded-lg border border-neutral-300 bg-white p-6 shadow-sm"
+        >
+          <h2 class="poppins-semibold text-lg">Información</h2>
+          <div class="flex flex-col divide-y divide-neutral-300">
+            <div class="flex w-full flex-col gap-1 pb-3">
+              <h3 class="text-neutral-600">Número de Empleados</h3>
+              <h4 class="poppins-semibold text-2xl">{{#if
+                  headcount
+                }}{{headcount}}{{else}}-{{/if}}</h4>
+            </div>
+            <div class="flex w-full flex-col gap-1 py-3">
+              <h3 class="text-neutral-600">Revenue Anual</h3>
+              <h4 class="poppins-semibold text-2xl">{{#if
+                  revenue
+                }}{{revenue}}{{else}}-{{/if}}</h4>
+            </div>
+            <div class="flex w-full flex-col gap-1 py-3">
+              <h3 class="text-neutral-600">Año de Fundación</h3>
+              <h4 class="poppins-semibold text-2xl">{{#if
+                  fundingYear
+                }}{{fundingYear}}{{else}}-{{/if}}</h4>
+            </div>
+            <div class="flex w-full flex-col gap-2 pt-3">
+              <h3 class="text-neutral-600">Industrias</h3>
+              <div
+                class="flex max-h-32 flex-row flex-wrap gap-2 overflow-hidden"
+              >
+                {{#each industries}}
+                  <div
+                    class="flex w-fit flex-row gap-3 rounded-md bg-slate-100 px-3 py-1 text-sm"
+                  >
+                    {{this}}</div>
                 {{/each}}
+              </div>
             </div>
+          </div>
         </div>
-        {{/if}}
+      </div>
     </div>
 
+    <div
+      class="prospect flex h-12 flex-1 flex-col gap-8 bg-[#003282] p-8 pt-12 container-question"
+    >
+      <div class="flex flex-row justify-start gap-8 relative">
+       
+          {{#if photo}}
+            <img
+              src={{photo}}
+              alt="photo "
+              class="aspect-square w-32 h-32 flex-initial rounded-lg"
+            />
+          {{else}}
+            <div
+              class="h-32 w-32 flex-initial flex items-center justify-center aspect-square rounded-lg border border-neutral-300 bg-neutral-200"
+            >
+              <i class="ph-bold ph-camera-slash text-3xl text-neutral-500"></i>
+            </div>
+        
+        {{/if}}
+        <div class="flex flex-col justify-start gap-4 flex-1 max-w-96">
 
+           
+          <h1
+            class="poppins-semibold w-full text-pretty text-4xl text-white"
+          >{{fullName}}
+          </h1>
+        
+          
+          <h2
+            class="flex w-fit flex-row gap-3 rounded-md bg-[#1E87FF] px-4 py-1 text-white shadow-sm"
+          >
+            {{role}}</h2>
+        </div>
 
-</body>
+      </div>
+      {{#unless isTurboSales}}
+
+        <div class="w-full flex flex-row flex-wrap gap-4">
+          {{#if email}}
+            <a
+              href="mailto:{{email}}"
+              class="flex w-fit flex-row items-center gap-2 rounded-md bg-white px-4 py-1"
+            ><i
+                class="ph-fill ph-envelope-simple text-[#1E87FF]"
+              ></i>{{email}}</a>
+          {{/if}}
+          {{#if prospectPhone}}
+            <div
+              class="flex w-fit flex-row items-center gap-2 rounded-md bg-white px-4 py-1"
+            >
+              <i class="ph-fill ph-phone text-[#1E87FF]"></i>{{prospectPhone}}
+            </div>
+          {{/if}}
+          {{#if prospectLinkedin}}
+            <a
+              href={{prospectLinkedin}}
+              class="flex w-fit flex-row items-center gap-2 rounded-md bg-white px-4 py-1"
+            >
+              <i
+                class="ph-fill ph-linkedin-logo text-[#1E87FF]"
+              ></i>{{prospectLinkedinFormatted}}
+            </a>
+          {{/if}}
+          {{#if prospectLocation}}
+            <div
+              class="flex w-fit flex-row items-center gap-2 rounded-md bg-white px-4 py-1"
+            >
+              <i
+                class="ph-fill ph-map-pin text-[#1E87FF]"
+              ></i>{{prospectLocation}}
+            </div>
+          {{/if}}
+
+        </div>
+      {{/unless}}
+      <span class="w-full border-t-[1px] border-white"></span>
+
+      <div class="flex flex-col items-start justify-start gap-2">
+        <h2 class="poppins-semibold text-lg text-[white]">Contexto</h2>
+        <div
+          class="text-pretty rounded-md border border-slate-300 bg-white p-4 shadow-sm"
+        >{{{filter emailContext "markdown html"}}}</div>
+      </div>
+
+      {{#if includeAssistants}}
+        <div class="flex flex-col items-start justify-start gap-2">
+          <h2 class="poppins-semibold text-lg text-[white]">Otros asistentes</h2>
+          <div
+            class="flex flex-row gap-6 flex-wrap overflow-hidden h-16 flex-initial"
+          >
+            {{#each assistants}}
+
+              <div
+                class="flex flex-row justify-start gap-4 rounded-md border border-slate-300 h-fit bg-white p-2 pr-3"
+              >
+                {{#if this.photo}}
+                  <img
+                    src={{this.photo}}
+                    alt="photo_assistant"
+                    class="h-10 w-10 flex-initial rounded-md"
+                  />
+                {{else}}
+                  <div
+                    class="h-32 w-32 flex-initial flex items-center justify-center aspect-square rounded-lg border border-neutral-300 bg-neutral-200"
+                  >
+                    <i
+                      class="ph-bold ph-camera-slash text text-neutral-500"
+                    ></i>
+                  </div>
+                {{/if}}
+                <div class="flex flex-col items-start justify-start">
+                  <h3
+                    class="w-full text-pretty text-sm font-semibold"
+                  >{{this.name}}</h3>
+                  <h5 class="flex w-fit flex-row text-xs">{{this.role}}</h5>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      {{/if}}
+    </div>
+
+  </body>
 
 </html>
